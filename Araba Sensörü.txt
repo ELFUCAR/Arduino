@@ -1,0 +1,130 @@
+const int trigger_pin = 12; //12. pini  trigger pin olarak tanýmladýk.
+ 
+const int echo_pin = 13; //13. pini echo pin  olarak tanýmladýk.
+ 
+const int aled = 2; //2. pini aled  olarak tanýmladýk.
+ 
+const int bled = 3; //3. pini bled  olarak tanýmladýk.
+ 
+const int cled = 4; //4. pini cled  olarak tanýmladýk.
+ 
+const int dled = 5; //5. pini dled  olarak tanýmladýk.
+ 
+const int buzzer = 6; //6. pini buzzer  olarak tanýmladýk.
+ 
+int sure ; //sure adlý bir deðiþken tanýmladýk.
+ 
+int mesafe ; //mesafe adlý bir deðiþken tanýmladýk.
+ 
+
+
+ 
+void setup() {
+ 
+pinMode(aled , OUTPUT); //aled'i çýkýþ olarak tanýmladýk.
+ 
+pinMode(bled , OUTPUT); //bled'i çýkýþ olarak tanýmladýk.
+ 
+pinMode(cled , OUTPUT); //cled'i çýkýþ olarak tanýmladýk.
+ 
+pinMode(dled , OUTPUT); //dled'i çýkýþ olarak tanýmladýk.
+ 
+pinMode(buzzer , OUTPUT); //buzzer'i çýkýþ olarak tanýmladýk.
+ 
+pinMode(trigger_pin , OUTPUT); //trigger pin'i çýkýþ olarak tanýmladýk.
+ 
+pinMode(echo_pin , INPUT); //echo pin'i giriþ olarak tanýmladýk.
+ 
+}
+ 
+void loop()
+ 
+{
+ 
+digitalWrite(trigger_pin , HIGH); //trigger pin'e enerji verdik.
+ 
+delayMicroseconds(10); //mesafeyi ölçmesini saðladýk.
+ 
+digitalWrite(trigger_pin , LOW); //trigger pinin enerjisini kestik.
+ 
+sure = pulseIn(echo_pin , HIGH); //sure deðiþkenin echo pin'in deðiþtirmesini saðladýk.
+ 
+mesafe = (sure / 2) / 29.1;
+ 
+
+ 
+if (mesafe <= 10) //mesafemiz 10 cm den kýsa ise bunlarý yapar.
+ 
+{
+ 
+digitalWrite(aled , HIGH); //aled'e enerji verdik.
+ 
+digitalWrite(bled , HIGH); //bled'e enerji verdik.
+ 
+digitalWrite(cled , HIGH); //cled'e enerji verdik.
+ 
+digitalWrite(dled , HIGH); //dled'e enerji verdik.
+ 
+digitalWrite(buzzer , HIGH); //buzzer'e enerji verdik.
+ 
+delay(250); //0,25 saniyede bir tekrarlanmasýný saðladýk.
+ 
+digitalWrite(buzzer , LOW); //buzzer'in enerjisini kestik.
+ 
+}
+ 
+else if (mesafe <= 25) //mesafemiz 25 cm den kýsa ise bunlarý yapar.
+ 
+{
+ 
+digitalWrite(aled , LOW); //aled'in enerjisini kestik.
+ 
+digitalWrite(bled , HIGH); //bled'e enerji verdik.
+ 
+digitalWrite(cled , HIGH); //cled'e enerji verdik.
+ 
+digitalWrite(dled , HIGH); //dled'e enerji verdik.
+ 
+digitalWrite(buzzer , HIGH); //buzzer'e enerji verdik.
+ 
+delay(500); //0,50 saniyede bir tekrarlanmasýný saðladýk
+ 
+digitalWrite(buzzer , LOW); //buzzer'in enerjisini kestik.
+ 
+}
+ 
+else if ( mesafe <= 50) //mesafemiz 50 cm den kýsa ise bunlarý yapar.
+ 
+{
+ 
+digitalWrite(aled , LOW); //aled'in enerjisini kestik.
+ 
+digitalWrite(bled , LOW); //bled'in enerjisini kestik.
+ 
+digitalWrite(cled , HIGH); //cled'e enerji verdik.
+ 
+digitalWrite(dled , HIGH); //dled'e enerji verdik.
+ 
+digitalWrite(buzzer , HIGH); //buzzer'e enerji verdik.
+ 
+delay(750); //0,75 saniyede bir tekrarlanmasýný saðladýk
+ 
+digitalWrite(buzzer , LOW); //buzzer'in enerjisini kestik.
+ 
+}
+ 
+else //alan boþ ise bunu yapar
+ 
+{
+ 
+digitalWrite(aled , LOW); //aled'in enerjisini kestik.
+ 
+digitalWrite(bled , LOW); //bled'in enerjisini kestik.
+ 
+digitalWrite(cled , LOW); //cled'in enerjisini kestik.
+ 
+digitalWrite(dled , HIGH); //dled'e enerji verdik.
+ 
+}
+ 
+}
